@@ -1,67 +1,58 @@
-let travelData = {};
+let travelData = [];
 
-fetch("travel_recommendation_api.json")
-    .then(response => response.json())
-    .then(data => {
-        travelData = data;
-        console.log(data);
-    })
-    .catch(error => {
-        console.error("Error loading JSON:", error);
-    });
+// FETCH JSON DATA
+fetch("travel_recommendation.json")
+  .then(res => res.json())
+  .then(data => {
+    travelData = data;
+    console.log("Data loaded:", travelData);
+  });
 
-const searchBtn = document.getElementById("searchBtn");
-const resetBtn = document.getElementById("resetBtn");
+// SEARCH FUNCTION
+function search() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
 
-searchBtn.addEventListener("click", searchRecommendations);
-resetBtn.addEventListener("click", clearResults);
+  let results = [];
 
-function searchRecommendations() {
+  // TASK 7: keyword matching
+  if (input.includes("beach")) {
+    results = travelData.beaches;
+  }
+  else if (input.includes("temple")) {
+    results = travelData.temples;
+  }
+  else if (input.includes("country")) {
+    results = travelData.countries;
+  }
 
-    const keyword =
-        document.getElementById("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
-
-    let results = [];
-
-    if (keyword === "beach" || keyword === "beaches") {
-        results = travelData.beaches;
-    }
-    else if (keyword === "temple" || keyword === "temples") {
-        results = travelData.temples;
-    }
-    else if (keyword === "country" || keyword === "countries") {
-        results = travelData.countries;
-    }
-
-    displayResults(results);
+  displayResults(results);
 }
 
-function displayResults(results) {
+// DISPLAY FUNCTION (TASK 8)
+function displayResults(items) {
+  const container = document.getElementById("results");
+  container.innerHTML = "";
 
-    const container =
-        document.getElementById("results");
+  if (!items || items.length === 0) {
+    container.innerHTML = "No results found";
+    return;
+  }
 
-    container.innerHTML = "";
-
-    results.forEach(item => {
-
-        container.innerHTML += `
-            <div class="card">
-                <img src="${item.imageUrl}"
-                     alt="${item.name}">
-
-                <h3>${item.name}</h3>
-
-                <p>${item.description}</p>
-            </div>
-        `;
-    });
+  items.forEach(item => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${item.imageUrl}" />
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+      </div>
+    `;
+  });
 }
 
+// TASK 9: CLEAR BUTTON
 function clearResults() {
-    document.getElementById("searchInput").value = "";
-    document.getElementById("results").innerHTML = "";
+  document.getElementById("results").innerHTML = "";
+  document.getElementById("searchInput").value = "";
 }
+const but = document.getElementById('searchBtn');
+but.addEventListener('click',search)
