@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Recommendation</title>
+    <link rel="stylesheet" href="travel_recommendation.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h2>Travel Recommendation</h2>
+        </div>
+
+        <div class="menu">
+            <a href="travel_recommendation.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="search-section">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search beach, temple, country">
+            <button id="searchBtn">Search</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="overlay">
+            <h1>Explore Your Dream Destination</h1>
+
+            <p>
+                Discover beautiful beaches, historic temples,
+                and amazing countries around the world.
+            </p>
+        </div>
+    </section>
+
+    <!-- Recommendation Results -->
+    <section id="results" class="results-grid"></section>
+
+    <script src="travel_recommendation.js"></script>
+
+</body>
+</html>
